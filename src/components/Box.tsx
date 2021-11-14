@@ -1,4 +1,5 @@
 import styled from "@emotion/styled"
+import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined"
 import React from "react"
 
 const Container = styled.div`
@@ -13,7 +14,11 @@ interface Props {
 }
 
 const Box = ({ display, onClick }: Props) => {
-  return <Container onClick={onClick}>{display}</Container>
+  return (
+    <Container onClick={onClick}>
+      <CircleOutlinedIcon fontSize="large" />
+    </Container>
+  )
 }
 
 export default Box

@@ -1,9 +1,9 @@
 import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
 import "./App.css"
-import Box from "./Box"
-import checkWin from "./checkWin"
-import makeSquare from "./makeSquare"
+import Box from "./components/Box"
+import checkWin from "./utils/checkWin"
+import makeSquare from "./utils/makeSquare"
 
 const GridLayout = styled.div`
   display: grid;
