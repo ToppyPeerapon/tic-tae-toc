@@ -1,26 +1,59 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from "@emotion/styled"
+import React, { useEffect, useState } from "react"
+import "./App.css"
+import Box from "./Box"
+import checkWin from "./checkWin"
+import makeSquare from "./makeSquare"
+
+const GridLayout = styled.div`
+  display: grid;
+  grid-template-columns: auto auto auto;
+`
 
 function App() {
+  const [game, setGame] = useState<string[][]>([
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+  ])
+  const [currentPlayer, setCurrentPlayer] = useState<"o" | "x">("x")
+
+  const togglePlayer = () => {
+    if (currentPlayer === "o") setCurrentPlayer("x")
+    else setCurrentPlayer("o")
+  }
+
+  useEffect(() => {
+    const xSquare = makeSquare(game, "x")
+    const oSquare = makeSquare(game, "o")
+
+    if (checkWin(xSquare)) alert("x is winner")
+    if (checkWin(oSquare)) alert("o is winner")
+  }, [game])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <GridLayout>
+      {(() => {
+        const renderEle = []
+        for (let i = 0; i < 3; i++) {
+          for (let j = 0; j < 3; j++) {
+            renderEle.push(
+              <Box
+                onClick={() => {
+                  let mock = [...game]
+                  mock[i][j] = currentPlayer
+                  setGame(mock)
+                  togglePlayer()
+                }}
+                display={game[i][j]}
+              />
+            )
+          }
+        }
+        return renderEle
+      })()}
+    </GridLayout>
+  )
 }
 
-export default App;
+export default App
