@@ -25,12 +25,12 @@ const checkWin = (magicSquare: number[][]) => {
 
   if (sum === 15) return true
 
+  let round = 2
+  let sumTest = 0
   for (let i = 0; i < magicSquare.length; i++) {
-    let sum = 0
-    for (let j = 2; j >= 0; j--) {
-      sum = magicSquare[i][j] + sum
-    }
-    if (sum === 15) return true
+    sumTest = magicSquare[i][round] + sumTest
+    round = round - 1
+    if (sumTest === 15) return true
   }
 
   return false
